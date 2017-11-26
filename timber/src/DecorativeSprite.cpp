@@ -15,11 +15,13 @@ Texture DecorativeSprite::cloudTexture = [] {
     return texture;
 }();
 
-DecorativeSprite::DecorativeSprite(Texture& texture, Vector2u screenRes) {
+DecorativeSprite::DecorativeSprite(Texture& texture, Vector2u screenRes, Direction direction) {
     this->sprite = Sprite(texture);
     this->screenRes = screenRes;
+    this->direction = direction;
     this->isActive = false;
     this->xSpeed = 0.0f;
+    this->initialXPos = direction == Direction::left ? screenRes.x : 0;
 }
 
 void DecorativeSprite::initialise() {
@@ -29,7 +31,7 @@ void DecorativeSprite::initialise() {
     this->xSpeed = (rand() % 200 + 200);
 
     srand((int)time(0) * 10);
-    this->sprite.setPosition(this->screenRes.x, rand() % screenMidY);
+    this->sprite.setPosition(this->initialXPos, rand() % screenMidY);
 }
 
 void DecorativeSprite::next(float deltaSecs) {
@@ -44,7 +46,7 @@ void DecorativeSprite::next(float deltaSecs) {
         this->isActive = false;
     } else {
         this->sprite.setPosition(
-            position.x - this->xSpeed * deltaSecs,
+            position.x + (this->xSpeed * deltaSecs) * this->direction,
             position.y
         );
     }
@@ -55,9 +57,9 @@ Sprite DecorativeSprite::getSprite() {
 }
 
 DecorativeSprite DecorativeSprite::createBee(Vector2u screenRes) {
-    return DecorativeSprite(DecorativeSprite::beeTexture, screenRes);
+    return DecorativeSprite(DecorativeSprite::beeTexture, screenRes, Direction::left);
 }
 
 DecorativeSprite DecorativeSprite::createCloud(Vector2u screenRes) {
-    return DecorativeSprite(DecorativeSprite::cloudTexture, screenRes);
+    return DecorativeSprite(DecorativeSprite::cloudTexture, screenRes, Direction::right);
 }

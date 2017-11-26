@@ -3,13 +3,20 @@
 
 using namespace sf;
 
+enum Direction {
+    left = -1,
+    right = 1
+};
+
 class DecorativeSprite {
     private:
-        DecorativeSprite(Texture& texture, Vector2u screenRes); // TODO friend via new class?
+        DecorativeSprite(Texture& texture, Vector2u screenRes, Direction direction);
         void initialise();
         Sprite sprite;
         Vector2u screenRes;
+        Direction direction;
         float xSpeed;
+        float initialXPos;
         bool isActive;
         static Texture beeTexture;
         static Texture cloudTexture;

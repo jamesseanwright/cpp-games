@@ -41,16 +41,18 @@ int main() {
 
         bee.next(deltaSeconds);
 
-        for (DecorativeSprite cloud : clouds) {
-            cloud.next(deltaSeconds);
-        }
+        // for (DecorativeSprite cloud : clouds) {
+            clouds[0].next(deltaSeconds);
+        // }
 
         window.clear();
         window.draw(spriteBackground);
 
-        for (DecorativeSprite cloud : clouds) {
-            window.draw(cloud.getSprite());
-        }
+        // for (DecorativeSprite cloud : clouds) {
+            window.draw(clouds[0].getSprite());
+
+            // window.draw(cloud.getSprite());
+        // }
 
         window.draw(spriteTree);
         window.draw(bee.getSprite());
