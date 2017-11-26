@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include "DecorativeSprite.hpp"
 
 using namespace sf;
 
