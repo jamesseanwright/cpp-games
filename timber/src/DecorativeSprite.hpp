@@ -5,7 +5,7 @@ using namespace sf;
 
 class DecorativeSprite {
     private:
-        DecorativeSprite(Texture texture, Vector2u screenRes); // TODO friend via new class?
+        DecorativeSprite(Texture& texture, Vector2u screenRes); // TODO friend via new class?
         void initialise();
         Sprite sprite;
         Vector2u screenRes;
