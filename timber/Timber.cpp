@@ -4,7 +4,7 @@ using namespace sf;
 
 int main() {
     VideoMode vm(1920, 1080); // instance of VideoMode called vm
-    RenderWindow window(vm, "Timber!!!", Style::Fullscreen);
+    RenderWindow window(vm, "Timber!!!", Style::Titlebar);
 
     Sprite spriteBackground;
     Sprite spriteTree;
@@ -55,21 +55,40 @@ int main() {
         Time deltaTime = clock.restart();
 
         if (!beeActive) {
-            srand((int) time(0));
+            srand((int)time(0));
             beeSpeed = (rand() % 200) + 200;
 
-            srand((int) time(0) * 10);
+            srand((int)time(0) * 10);
             float y = (rand() % 500) + 500;
             spriteBee.setPosition(2000, y);
             beeActive = true;
         } else {
             spriteBee.setPosition(
-                spriteBee.getPosition().x - (beeSpeed * deltaTime.asSeconds()),
+                spriteBee.getPosition().x - beeSpeed * deltaTime.asSeconds(),
                 spriteBee.getPosition().y
             );
 
             if (spriteBee.getPosition().x < -100) {
                 beeActive = false;
+            }
+        }
+
+        if (!cloud1Active) {
+            srand((int)time(0) * 10);
+            cloud1Speed = (rand() % 200);
+
+            srand((int)time(0) * 10);
+            float y = (rand() % 150);
+            spriteCloud1.setPosition(-200, y);
+            cloud1Active = true;
+        } else {
+            spriteCloud1.setPosition(
+                spriteCloud1.getPosition().x + cloud1Speed * deltaTime.asSeconds(),
+                spriteCloud1.getPosition().y
+            );
+
+            if (spriteCloud1.getPosition().x > 1920) {
+                cloud1Active = false;
             }
         }
 
