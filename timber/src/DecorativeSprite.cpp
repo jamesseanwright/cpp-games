@@ -18,10 +18,36 @@ Texture DecorativeSprite::cloudTexture = [] {
 DecorativeSprite::DecorativeSprite(Texture texture, Vector2u screenRes) {
     this->sprite = Sprite(texture);
     this->screenRes = screenRes;
+    this->isActive = false;
+    this->xSpeed = 0.0f;
 }
 
-void DecorativeSprite::next() {
-    // TODO: game loop logic
+void DecorativeSprite::initialise() {
+    unsigned int screenMidY = screenRes.y / 2;
+
+    srand((int)time(0));
+    this->xSpeed = (rand() % 200 + 200);
+
+    srand((int)time(0) * 10);
+    this->sprite.setPosition(this->screenRes.x, (rand() % screenMidY) + screenMidY);
+}
+
+void DecorativeSprite::next(float deltaSecs) {
+    if (!this->isActive) {
+        this->initialise();
+        this->isActive = true;
+    }
+
+    Vector2f position = this->sprite.getPosition();
+
+    if (position.x < -100) {
+        this->isActive = false;
+    } else {
+        this->sprite.setPosition(
+            position.x - this->xSpeed * deltaSecs,
+            position.y
+        );
+    }
 }
 
 Sprite DecorativeSprite::getSprite() {
