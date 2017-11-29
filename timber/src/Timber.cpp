@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "DecorativeSprite.hpp"
 #include "GameState.hpp"
+#include "Hud.hpp"
 
 using namespace sf;
 
@@ -9,6 +10,7 @@ int main() {
     VideoMode vm(1920, 1080); // instance of VideoMode called vm
     RenderWindow window(vm, "Timber!!!", Style::Titlebar);
 
+    Hud hud = Hud::create(&gameState);
     DecorativeSprite bee = DecorativeSprite::createBee(window.getSize());
 
     DecorativeSprite clouds [3] = {
@@ -51,6 +53,8 @@ int main() {
             for (DecorativeSprite& cloud : clouds) {
                 cloud.next(deltaSeconds);
             }
+
+            hud.next();
         }
 
         window.clear();
@@ -62,6 +66,7 @@ int main() {
 
         window.draw(spriteTree);
         window.draw(bee.getSprite());
+        window.draw(hud.getScoreText());
 
         window.display();
     }
