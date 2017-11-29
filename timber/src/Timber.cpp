@@ -39,7 +39,7 @@ int main() {
         }
 
         if (Keyboard::isKeyPressed(Keyboard::Return)) {
-            gameState.unpause();
+            gameState.togglePause();
         }
 
         if (!gameState.isPaused()) {

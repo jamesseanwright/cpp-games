@@ -7,8 +7,7 @@ class GameState {
 
     public:
         static GameState create();
-        void pause();
-        void unpause();
+        void togglePause();
         bool isPaused();
 };
 

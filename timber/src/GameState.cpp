@@ -8,14 +8,9 @@ GameState GameState::create() {
     return GameState(); // Without `new` keyword, this is a stack allocation
 }
 
-void GameState::pause() {
-    this->paused = true;
+void GameState::togglePause() {
+    this->paused = !this->paused;
 }
-
-void GameState::unpause() {
-    this->paused = false;
-}
-
 bool GameState::isPaused() {
     return this->paused;
 }
