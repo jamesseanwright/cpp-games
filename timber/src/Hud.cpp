@@ -5,33 +5,56 @@
 using namespace sf;
 using namespace std;
 
-Hud::Hud(GameState* gameState, sf::Text scoreText) {
+Hud::Hud(GameState* gameState, RenderWindow* window, sf::Text scoreText, sf::Text pauseText) {
     this->gameState = gameState;
+    this->window = window;
     this->scoreText = scoreText;
+    this->pauseText = pauseText;
 }
 
-Hud Hud::create(GameState* gameState) {
-    /* font must be a pointer so that scoreText
-     * can reference it without it being destroyed.
+Hud Hud::create(GameState* gameState, RenderWindow* window) {
+    /* font must be a pointer so that it
+     * has an explicit address when consumed
+     * by scoreText (?)
      */
     Font* font = new Font();
     Text scoreText;
+    Text pauseText;
+    FloatRect pauseBounds = pauseText.getLocalBounds();
+    Vector2i windowBounds = window->getPosition();
 
     font->loadFromFile("fonts/KOMIKAP_.ttf");
+
     scoreText.setFont(*font);
     scoreText.setCharacterSize(70);
     scoreText.setColor(Color::White);
     scoreText.setPosition(20, 20);
 
-    return Hud(gameState, scoreText);
+    pauseText.setFont(*font);
+    pauseText.setCharacterSize(50);
+    pauseText.setColor(Color::White);
+    pauseText.setPosition(windowBounds.x / 2.0f, windowBounds.y / 2.0f);
+
+    pauseText.setOrigin(
+        pauseBounds.left + pauseBounds.width / 2.0f,
+        pauseBounds.top + pauseBounds.height / 2.0f
+    );
+
+    pauseText.setString("Hit Enter to Resume");
+
+    return Hud(gameState, window, scoreText, pauseText);
 }
 
 void Hud::next() {
     std::stringstream scoreStream;
     scoreStream << "Score: " << this->gameState->getScore();
-    scoreText.setString(scoreStream.str());
+    this->scoreText.setString(scoreStream.str());
 }
 
-sf::Text Hud::getScoreText() {
-    return this->scoreText;
+void Hud::render() {
+    this->window->draw(this->scoreText);
+
+    if (this->gameState->isPaused()) {
+        this->window->draw(this->pauseText);
+    }
 }

@@ -10,7 +10,7 @@ int main() {
     VideoMode vm(1920, 1080); // instance of VideoMode called vm
     RenderWindow window(vm, "Timber!!!", Style::Titlebar);
 
-    Hud hud = Hud::create(&gameState);
+    Hud hud = Hud::create(&gameState, &window);
     DecorativeSprite bee = DecorativeSprite::createBee(window.getSize());
 
     DecorativeSprite clouds [3] = {
@@ -66,7 +66,7 @@ int main() {
 
         window.draw(spriteTree);
         window.draw(bee.getSprite());
-        window.draw(hud.getScoreText());
+        hud.render();
 
         window.display();
     }

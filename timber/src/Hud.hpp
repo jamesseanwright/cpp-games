@@ -7,14 +7,16 @@ using namespace sf;
 
 class Hud {
     private:
-        Hud(GameState* gameState, sf::Text scoreText);
+        Hud(GameState* gameState, RenderWindow* window, sf::Text scoreText, sf::Text pauseText);
         GameState* gameState;
+        RenderWindow* window;
         sf::Text scoreText;
+        sf::Text pauseText;
 
     public:
         void next();
-        static Hud create(GameState* gameState);
-        sf::Text getScoreText();
+        void render();
+        static Hud create(GameState* gameState, RenderWindow* window);
 };
 
 #pragma once
