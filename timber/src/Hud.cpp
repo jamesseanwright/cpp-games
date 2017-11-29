@@ -45,6 +45,7 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
 }
 
 void Hud::next() {
+    gameState->incrementScore(); // TODO: temporary - remove!
     std::stringstream scoreStream;
     scoreStream << "Score: " << this->gameState->getScore();
     this->scoreText.setString(scoreStream.str());

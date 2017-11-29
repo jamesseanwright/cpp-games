@@ -2,6 +2,7 @@
 #include "DecorativeSprite.hpp"
 #include "GameState.hpp"
 #include "Hud.hpp"
+#include "Keys.hpp"
 
 using namespace sf;
 
@@ -10,6 +11,7 @@ int main() {
     VideoMode vm(1920, 1080); // instance of VideoMode called vm
     RenderWindow window(vm, "Timber!!!", Style::Titlebar);
 
+    Keys keys = Keys::create();
     Hud hud = Hud::create(&gameState, &window);
     DecorativeSprite bee = DecorativeSprite::createBee(&window);
 
@@ -34,13 +36,14 @@ int main() {
     spriteTree.setPosition(810, 0);
 
     Clock clock;
+    Event event;
 
     while (window.isOpen()) {
-        if (Keyboard::isKeyPressed(Keyboard::Escape)) {
+        if (keys.isPressedWithThrottle(Keyboard::Escape)) {
             window.close();
         }
 
-        if (Keyboard::isKeyPressed(Keyboard::Return)) {
+        if (keys.isPressedWithThrottle(Keyboard::Return)) {
             gameState.togglePause();
         }
 
