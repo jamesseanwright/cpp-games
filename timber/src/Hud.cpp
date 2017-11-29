@@ -21,7 +21,7 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
     Text scoreText;
     Text pauseText;
     FloatRect pauseBounds = pauseText.getLocalBounds();
-    Vector2i windowBounds = window->getPosition();
+    Vector2u windowBounds = window->getSize();
 
     font->loadFromFile("fonts/KOMIKAP_.ttf");
 
@@ -34,13 +34,12 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
     pauseText.setCharacterSize(50);
     pauseText.setColor(Color::White);
     pauseText.setPosition(windowBounds.x / 2.0f, windowBounds.y / 2.0f);
+    pauseText.setString("Hit Enter to Resume");
 
     pauseText.setOrigin(
         pauseBounds.left + pauseBounds.width / 2.0f,
         pauseBounds.top + pauseBounds.height / 2.0f
     );
-
-    pauseText.setString("Hit Enter to Resume");
 
     return Hud(gameState, window, scoreText, pauseText);
 }

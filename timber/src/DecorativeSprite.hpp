@@ -10,10 +10,10 @@ enum Direction {
 
 class DecorativeSprite {
     private:
-        DecorativeSprite(Texture& texture, Vector2u screenRes, Direction direction, int xSpeed, float initialYPos);
+        DecorativeSprite(Texture& texture, RenderWindow* window, Direction direction, int xSpeed, float initialYPos);
         void initialise();
         Sprite sprite;
-        Vector2u screenRes;
+        RenderWindow* window;
         Direction direction;
         int xSpeed;
         float initialXPos;
@@ -24,9 +24,9 @@ class DecorativeSprite {
 
     public:
         void next(float deltaSecs);
-        Sprite getSprite();
-        static DecorativeSprite createBee(Vector2u screenRes);
-        static DecorativeSprite createCloud(Vector2u screenRes, int xSpeed, float initialYPos);
+        void render();
+        static DecorativeSprite createBee(RenderWindow* window);
+        static DecorativeSprite createCloud(RenderWindow* window, int xSpeed, float initialYPos);
 };
 
 #pragma once

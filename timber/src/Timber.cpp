@@ -11,12 +11,12 @@ int main() {
     RenderWindow window(vm, "Timber!!!", Style::Titlebar);
 
     Hud hud = Hud::create(&gameState, &window);
-    DecorativeSprite bee = DecorativeSprite::createBee(window.getSize());
+    DecorativeSprite bee = DecorativeSprite::createBee(&window);
 
     DecorativeSprite clouds [3] = {
-        DecorativeSprite::createCloud(window.getSize(), 20, 10),
-        DecorativeSprite::createCloud(window.getSize(), 40, 80),
-        DecorativeSprite::createCloud(window.getSize(), 70, 160)
+        DecorativeSprite::createCloud(&window, 20, 10),
+        DecorativeSprite::createCloud(&window, 40, 80),
+        DecorativeSprite::createCloud(&window, 70, 160)
     };
 
     Sprite spriteBackground;
@@ -61,11 +61,11 @@ int main() {
         window.draw(spriteBackground);
 
         for (DecorativeSprite& cloud : clouds) {
-            window.draw(cloud.getSprite());
+            cloud.render();
         }
 
         window.draw(spriteTree);
-        window.draw(bee.getSprite());
+        bee.render();
         hud.render();
 
         window.display();
