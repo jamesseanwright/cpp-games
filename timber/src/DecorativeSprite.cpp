@@ -21,7 +21,7 @@ DecorativeSprite::DecorativeSprite(Texture& texture, RenderWindow* window, Direc
     this->direction = direction;
     this->isActive = false;
     this->xSpeed = xSpeed;
-    this->initialXPos = direction == Direction::left ? this->window->getSize().x : 0;
+    this->initialXPos = direction == Direction::left ? window->getSize().x : 0 - sprite.getLocalBounds().width;
     this->initialYPos = initialYPos;
 }
 
@@ -35,9 +35,11 @@ void DecorativeSprite::next(float deltaSecs) {
         this->isActive = true;
     }
 
+    FloatRect bounds = this->sprite.getLocalBounds();
     Vector2f position = this->sprite.getPosition();
+    Vector2u windowSize = this->window->getSize();
 
-    if (position.x < -100) {
+    if ((this->direction == Direction::left && position.x < 0 - bounds.width) || (this->direction == Direction::right && position.x > windowSize.x)) {
         this->isActive = false;
     } else {
         this->sprite.setPosition(
