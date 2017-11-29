@@ -1,9 +1,11 @@
 #include <SFML/Graphics.hpp>
 #include "DecorativeSprite.hpp"
+#include "GameState.hpp"
 
 using namespace sf;
 
 int main() {
+    GameState gameState = GameState::create();
     VideoMode vm(1920, 1080); // instance of VideoMode called vm
     RenderWindow window(vm, "Timber!!!", Style::Titlebar);
 
@@ -36,13 +38,19 @@ int main() {
             window.close();
         }
 
-        Time deltaTime = clock.restart();
-        float deltaSeconds = deltaTime.asSeconds();
+        if (Keyboard::isKeyPressed(Keyboard::Return)) {
+            gameState.unpause();
+        }
 
-        bee.next(deltaSeconds);
+        if (!gameState.isPaused()) {
+            Time deltaTime = clock.restart();
+            float deltaSeconds = deltaTime.asSeconds();
 
-        for (DecorativeSprite& cloud : clouds) {
-            cloud.next(deltaSeconds);
+            bee.next(deltaSeconds);
+
+            for (DecorativeSprite& cloud : clouds) {
+                cloud.next(deltaSeconds);
+            }
         }
 
         window.clear();
