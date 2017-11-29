@@ -10,9 +10,9 @@ int main() {
     DecorativeSprite bee = DecorativeSprite::createBee(window.getSize());
 
     DecorativeSprite clouds [3] = {
-        DecorativeSprite::createCloud(window.getSize()),
-        DecorativeSprite::createCloud(window.getSize()),
-        DecorativeSprite::createCloud(window.getSize())
+        DecorativeSprite::createCloud(window.getSize(), 20, 10),
+        DecorativeSprite::createCloud(window.getSize(), 40, 80),
+        DecorativeSprite::createCloud(window.getSize(), 70, 160)
     };
 
     Sprite spriteBackground;
