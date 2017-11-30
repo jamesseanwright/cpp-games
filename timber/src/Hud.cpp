@@ -20,7 +20,6 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
     Font* font = new Font();
     Text scoreText;
     Text pauseText;
-    FloatRect pauseBounds = pauseText.getLocalBounds();
     Vector2u windowBounds = window->getSize();
 
     font->loadFromFile("fonts/KOMIKAP_.ttf");
@@ -36,11 +35,6 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
     pauseText.setPosition(windowBounds.x / 2.0f, windowBounds.y / 2.0f);
     pauseText.setString("Hit Enter to Resume");
 
-    pauseText.setOrigin(
-        pauseBounds.left + pauseBounds.width / 2.0f,
-        pauseBounds.top + pauseBounds.height / 2.0f
-    );
-
     return Hud(gameState, window, scoreText, pauseText);
 }
 
@@ -55,6 +49,13 @@ void Hud::render() {
     this->window->draw(this->scoreText);
 
     if (this->gameState->isPaused()) {
+        FloatRect pauseBounds = this->pauseText.getLocalBounds();
+
+        this->pauseText.setOrigin( // only works once text has been drawn. TODO: initial render bool
+            pauseBounds.left + pauseBounds.width / 2.0f,
+            pauseBounds.top + pauseBounds.height / 2.0f
+        );
+
         this->window->draw(this->pauseText);
     }
 }
