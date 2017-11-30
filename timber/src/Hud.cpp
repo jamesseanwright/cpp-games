@@ -21,6 +21,7 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
     Font* font = new Font();
     Text scoreText;
     Text pauseText;
+
     RectangleShape timeBar;
     Vector2u windowBounds = window->getSize();
 
@@ -39,16 +40,19 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
     pauseText.setCharacterSize(50);
     pauseText.setColor(Color::White);
     pauseText.setPosition(windowBounds.x / 2.0f, windowBounds.y / 2.0f);
-    pauseText.setString("Hit Enter to Resume");
 
     return Hud(gameState, window, scoreText, pauseText, timeBar);
 }
 
 void Hud::next(float deltaSecs) {
     gameState->incrementScore(); // TODO: temporary - remove!
-    std::stringstream scoreStream;
+    stringstream scoreStream;
+    stringstream pauseTextStream;
     scoreStream << "Score: " << this->gameState->getScore();
+    pauseTextStream << "Hit Enter to " << (gameState->getStateFlag() == StateFlag::title ? "Start" : "Resume");
+
     this->scoreText.setString(scoreStream.str());
+    this->pauseText.setString(pauseTextStream.str());
 
     this->timeBar.setSize(
         Vector2f(

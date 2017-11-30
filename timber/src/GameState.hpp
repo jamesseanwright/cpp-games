@@ -1,5 +1,10 @@
 #pragma once
 
+enum StateFlag {
+    title,
+    gameStarted
+};
+
 class GameState {
     private:
         constexpr static int SCORE_INCREMENT = 10;
@@ -7,6 +12,8 @@ class GameState {
         bool paused;
         int score;
         float timeRemainingSecs;
+        StateFlag stateFlag;
+        void updateStateFlag();
 
     public:
         constexpr static float TOTAL_TIME_SECS = 5;
@@ -17,6 +24,7 @@ class GameState {
         int getScore();
         void decrementTimeRemaining(float deltaSecs);
         float getTimeRemainingSecs();
+        StateFlag getStateFlag();
 };
 
 #pragma once
