@@ -58,7 +58,7 @@ int main() {
                 cloud.next(deltaSeconds);
             }
 
-            hud.next();
+            hud.next(deltaSeconds);
             gameState.decrementTimeRemaining(deltaSeconds);
         }
 

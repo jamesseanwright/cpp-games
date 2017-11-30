@@ -2,15 +2,14 @@
 
 class GameState {
     private:
-        const int SCORE_INCREMENT = 10;
-        const float TOTAL_TIME_SECS = 5;
-
+        constexpr static int SCORE_INCREMENT = 10;
         GameState();
         bool paused;
         int score;
         float timeRemainingSecs;
 
     public:
+        constexpr static float TOTAL_TIME_SECS = 5;
         static GameState create();
         void togglePause();
         bool isPaused();
