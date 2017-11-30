@@ -59,6 +59,7 @@ int main() {
             }
 
             hud.next();
+            gameState.decrementTimeRemaining(deltaSeconds);
         }
 
         window.clear();

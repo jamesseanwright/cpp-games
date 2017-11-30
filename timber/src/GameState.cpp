@@ -3,10 +3,11 @@
 GameState::GameState() {
     this->paused = true;
     this->score = 0;
+    this->timeRemainingSecs = GameState::TOTAL_TIME_SECS;
 }
 
 GameState GameState::create() {
-    return GameState(); // Without `new` keyword, this is a stack allocation
+    return GameState(); // Without `new` keyword, this is a stack allocation (TODO: confirm this)
 }
 
 void GameState::togglePause() {
@@ -23,4 +24,12 @@ void GameState::incrementScore() {
 
 int GameState::getScore() {
     return this->score;
+}
+
+void GameState::decrementTimeRemaining(float deltaSecs) {
+    this->timeRemainingSecs -= deltaSecs;
+}
+
+float GameState::getTimeRemainingSecs() {
+    return this->timeRemainingSecs;
 }
