@@ -47,8 +47,9 @@ int main() {
             gameState.togglePause();
         }
 
+        Time deltaTime = clock.restart();
+
         if (!gameState.isPaused()) {
-            Time deltaTime = clock.restart();
             float deltaSeconds = deltaTime.asSeconds();
 
             bee.next(deltaSeconds);
