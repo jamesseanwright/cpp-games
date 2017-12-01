@@ -2,7 +2,8 @@
 
 enum StateFlag {
     title,
-    gameStarted
+    gameStarted,
+    outOfTime
 };
 
 class GameState {
@@ -13,6 +14,7 @@ class GameState {
         int score;
         float timeRemainingSecs;
         StateFlag stateFlag;
+        void init();
 
     public:
         constexpr static float TOTAL_TIME_SECS = 5;

@@ -64,12 +64,9 @@ void Hud::render() {
     this->window->draw(this->timeBar);
 
     if (this->gameState->isPaused()) {
-        stringstream pauseTextStream;
         FloatRect pauseBounds = this->pauseText.getLocalBounds();
 
-        pauseTextStream << "Hit Enter to " << (gameState->getStateFlag() == StateFlag::title ? "Start" : "Resume");
-
-        this->pauseText.setString(pauseTextStream.str());
+        this->pauseText.setString(this->getPauseText());
 
         this->pauseText.setOrigin( // only works once text has been drawn. TODO: initial render bool
             pauseBounds.left + pauseBounds.width / 2.0f,
@@ -78,4 +75,17 @@ void Hud::render() {
 
         this->window->draw(this->pauseText);
     }
+}
+
+string Hud::getPauseText() {
+    stringstream pauseTextStream;
+    StateFlag stateFlag = this->gameState->getStateFlag();
+
+    if (stateFlag == StateFlag::outOfTime) {
+        pauseTextStream << "Out of Time! ";
+    }
+
+    pauseTextStream << "Hit Enter to " << (stateFlag == StateFlag::gameStarted ? "Resume" : "Start");
+
+    return pauseTextStream.str();
 }

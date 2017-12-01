@@ -4,6 +4,7 @@
 #include "GameState.hpp"
 
 using namespace sf;
+using namespace std;
 
 class Hud {
     private:
@@ -21,6 +22,7 @@ class Hud {
     public:
         void next(float deltaSecs);
         void render();
+        string getPauseText();
         static Hud create(GameState* gameState, RenderWindow* window);
 };
 

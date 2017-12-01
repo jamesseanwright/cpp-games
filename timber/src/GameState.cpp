@@ -1,14 +1,18 @@
 #include "GameState.hpp"
 
 GameState::GameState() {
-    this->paused = true;
-    this->score = 0;
-    this->timeRemainingSecs = GameState::TOTAL_TIME_SECS;
-    this->stateFlag = StateFlag::title;
+    this->init();
 }
 
 GameState GameState::create() {
     return GameState(); // Without `new` keyword, this is a stack allocation (TODO: confirm this)
+}
+
+void GameState::init() {
+    this->paused = true;
+    this->score = 0;
+    this->timeRemainingSecs = GameState::TOTAL_TIME_SECS;
+    this->stateFlag = StateFlag::title;
 }
 
 void GameState::togglePause() {
@@ -35,7 +39,9 @@ void GameState::decrementTimeRemaining(float deltaSecs) {
     this->timeRemainingSecs -= deltaSecs;
 
     if (this->timeRemainingSecs <= 0) {
-        this->stateFlag = StateFlag::title;
+        this->stateFlag = StateFlag::outOfTime;
+        this->togglePause();
+        this->init();
     }
 }
 
