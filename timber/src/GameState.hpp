@@ -13,7 +13,6 @@ class GameState {
         int score;
         float timeRemainingSecs;
         StateFlag stateFlag;
-        void updateStateFlag();
 
     public:
         constexpr static float TOTAL_TIME_SECS = 5;

@@ -47,12 +47,9 @@ Hud Hud::create(GameState* gameState, RenderWindow* window) {
 void Hud::next(float deltaSecs) {
     gameState->incrementScore(); // TODO: temporary - remove!
     stringstream scoreStream;
-    stringstream pauseTextStream;
     scoreStream << "Score: " << this->gameState->getScore();
-    pauseTextStream << "Hit Enter to " << (gameState->getStateFlag() == StateFlag::title ? "Start" : "Resume");
 
     this->scoreText.setString(scoreStream.str());
-    this->pauseText.setString(pauseTextStream.str());
 
     this->timeBar.setSize(
         Vector2f(
@@ -67,7 +64,12 @@ void Hud::render() {
     this->window->draw(this->timeBar);
 
     if (this->gameState->isPaused()) {
+        stringstream pauseTextStream;
         FloatRect pauseBounds = this->pauseText.getLocalBounds();
+
+        pauseTextStream << "Hit Enter to " << (gameState->getStateFlag() == StateFlag::title ? "Start" : "Resume");
+
+        this->pauseText.setString(pauseTextStream.str());
 
         this->pauseText.setOrigin( // only works once text has been drawn. TODO: initial render bool
             pauseBounds.left + pauseBounds.width / 2.0f,

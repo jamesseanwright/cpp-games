@@ -11,15 +11,12 @@ GameState GameState::create() {
     return GameState(); // Without `new` keyword, this is a stack allocation (TODO: confirm this)
 }
 
-void GameState::updateStateFlag() {
-    this->stateFlag = this->stateFlag == StateFlag::title
-        ? StateFlag::gameStarted
-        : StateFlag::title;
-}
-
 void GameState::togglePause() {
     this->paused = !this->paused;
-    this->updateStateFlag();
+
+    if (!this->paused && this->stateFlag == StateFlag::title) {
+        this->stateFlag = StateFlag::gameStarted;
+    }
 }
 
 bool GameState::isPaused() {
@@ -36,6 +33,10 @@ int GameState::getScore() {
 
 void GameState::decrementTimeRemaining(float deltaSecs) {
     this->timeRemainingSecs -= deltaSecs;
+
+    if (this->timeRemainingSecs <= 0) {
+        this->stateFlag = StateFlag::title;
+    }
 }
 
 float GameState::getTimeRemainingSecs() {
