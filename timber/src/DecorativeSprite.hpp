@@ -3,7 +3,7 @@
 
 using namespace sf;
 
-enum Direction {
+enum class Direction : int {
     left = -1,
     right = 1
 };

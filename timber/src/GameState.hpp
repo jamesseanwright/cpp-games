@@ -1,6 +1,6 @@
 #pragma once
 
-enum StateFlag {
+enum class StateFlag {
     title,
     gameStarted,
     outOfTime

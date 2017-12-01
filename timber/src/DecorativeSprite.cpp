@@ -43,7 +43,7 @@ void DecorativeSprite::next(float deltaSecs) {
         this->isActive = false;
     } else {
         this->sprite.setPosition(
-            position.x + (this->xSpeed * deltaSecs) * this->direction,
+            position.x + (this->xSpeed * deltaSecs) * (int)this->direction,
             position.y
         );
     }
