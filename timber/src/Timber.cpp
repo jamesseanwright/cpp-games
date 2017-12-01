@@ -39,6 +39,8 @@ int main() {
     Event event;
 
     while (window.isOpen()) {
+        window.pollEvent(event); // required to keep window alive. TODO: use event with throttled key abstraction
+
         if (keys.isPressedWithThrottle(Keyboard::Escape)) {
             window.close();
         }
