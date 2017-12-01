@@ -1,15 +1,18 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+using namespace sf;
+
 class Keys {
-    const sf::Int32 THROTTLE_MS = 200;
+    const Int32 THROTTLE_MS = 200;
 
     private:
         Keys();
-        sf::Clock clock;
+        Clock clock;
+        Keyboard::Key lastKey;
 
     public:
-        bool isPressedWithThrottle(sf::Keyboard::Key key);
+        bool isReleasedWithThrottle(Event* event, Keyboard::Key key);
         static Keys create();
 };
 

@@ -39,14 +39,14 @@ int main() {
     Event event;
 
     while (window.isOpen()) {
-        window.pollEvent(event); // required to keep window alive. TODO: use event with throttled key abstraction
+        while (window.pollEvent(event)) {
+            if (keys.isReleasedWithThrottle(&event, Keyboard::Escape)) {
+                window.close();
+            }
 
-        if (keys.isPressedWithThrottle(Keyboard::Escape)) {
-            window.close();
-        }
-
-        if (keys.isPressedWithThrottle(Keyboard::Return)) {
-            gameState.togglePause();
+            if (keys.isReleasedWithThrottle(&event, Keyboard::Return)) {
+                gameState.togglePause();
+            }
         }
 
         Time deltaTime = clock.restart();

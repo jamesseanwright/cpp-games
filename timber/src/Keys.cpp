@@ -4,20 +4,26 @@
 using namespace sf;
 
 Keys::Keys() {
-    this->clock = sf::Clock();
+    this->clock = Clock();
 }
 
 Keys Keys::create() {
     return Keys();
 }
 
-bool Keys::isPressedWithThrottle(Keyboard::Key key) {
-    sf::Time elapsedTime = this->clock.getElapsedTime();
-    bool isPressed = elapsedTime.asMilliseconds() > Keys::THROTTLE_MS && sf::Keyboard::isKeyPressed(key);
+bool Keys::isReleasedWithThrottle(Event* event, Keyboard::Key key) {
+    if (event->type != Event::KeyReleased) {
+        return false;
+    }
 
-    if (isPressed) {
+    this->lastKey = key; // TODO: restart clock if changed
+
+    Time elapsedTime = this->clock.getElapsedTime();
+    bool isReleased = elapsedTime.asMilliseconds() > Keys::THROTTLE_MS && event->key.code == key;
+
+    if (isReleased) {
         this->clock.restart();
     }
 
-    return isPressed;
+    return isReleased;
 }
