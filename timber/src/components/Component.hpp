@@ -1,6 +1,6 @@
 #pragma once
 
-#include<string>
+#include <string>
 #include "../systems/System.hpp"
 
 using namespace std;

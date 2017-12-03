@@ -1,7 +1,7 @@
 #pragma once
 
-#include<unordered_map>
-#include<vector>
+#include <unordered_map>
+#include <vector>
 #include "../components/Component.hpp"
 
 using namespace std; // TODO: remove namespaces
