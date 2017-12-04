@@ -10,6 +10,7 @@ class Positionable : Component {
         float y;
 
     public:
+        static const std::string NAME = "SpriteRenderable";
         Positionable(float x, float y);
         float getX();
         float getY();

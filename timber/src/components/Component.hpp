@@ -6,12 +6,6 @@
 using namespace std;
 
 class Component {
-    protected:
-        System* system;
-        string name;
-
-    public:
-        string getName();
 
 };
 
