@@ -7,7 +7,7 @@
 
 const std::string SPRITE_RENDERABLE_NAME = "SpriteRenderable"; // TODO: namespace?
 
-class SpriteRenderable : Component {
+class SpriteRenderable : public Component {
     private:
         SpriteRenderable(sf::Sprite* sprite);
         sf::Sprite* sprite;

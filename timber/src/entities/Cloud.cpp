@@ -1,8 +1,8 @@
-// #include "Entity.hpp";
+#include "Entity.hpp";
+#include "../components/SpriteRenderable.hpp";
 
-// Entity cloud = Entity.create(
-//     FlashComponent.create(),
-//     FlashComponent.create(),
-//     FlashComponent.create(),
-//     FlashComponent.create(),
-// );
+Entity createCloud() {
+    return Entity(new Component[1] {
+        SpriteRenderable::create("graphics/cloud.png")
+    })
+}

@@ -1,7 +1,6 @@
 #pragma once
 
 #include <unordered_map>
-#include <vector>
 #include "../components/Component.hpp"
 
 using namespace std; // TODO: remove namespaces
@@ -11,7 +10,7 @@ class Entity {
         unordered_map<string, Component*> components;
 
     public:
-        Entity(vector<Component>* components);
+        Entity(Component components []);
 
         template<typename T>
         T getComponent(string name);

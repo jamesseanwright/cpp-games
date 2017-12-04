@@ -1,11 +1,11 @@
 #include <unordered_map>
-#include <vector>
+#include <>
 #include <string>
 #include "Entity.hpp"
 #include "../components/Component.hpp"
 
-Entity::Entity(vector<Component>* compv) {
-    for (Component component : *compv) {
+Entity::Entity(Component components []) {
+    for (Component component : components) {
         this->components[component.getName()] = &component;
     }
 }
