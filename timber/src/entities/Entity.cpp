@@ -10,7 +10,7 @@ Entity::Entity(vector<Component>* compv) {
     }
 }
 
-template<Component T>
-T* Entity::getComponent(std::string name) {
-    return (T*) this->components[name];
+template<typename T>
+T Entity::getComponent(std::string name) {
+    return (T) this->components[name];
 }

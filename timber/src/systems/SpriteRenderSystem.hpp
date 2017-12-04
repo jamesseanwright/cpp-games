@@ -7,6 +7,7 @@ class SpriteRenderSystem : System {
     private:
         SpriteRenderSystem(sf::RenderWindow* window);
         sf::RenderWindow* window;
+        void next(Entity* entity, float deltaSecs);
 
     public:
         static SpriteRenderSystem create(sf::RenderWindow* window);

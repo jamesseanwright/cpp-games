@@ -5,6 +5,8 @@
 #include <SFML/Graphics.hpp>
 #include "Component.hpp"
 
+const std::string SPRITE_RENDERABLE_NAME = "SpriteRenderable"; // TODO: namespace?
+
 class SpriteRenderable : Component {
     private:
         SpriteRenderable(sf::Sprite* sprite);
@@ -12,7 +14,6 @@ class SpriteRenderable : Component {
         static std::unordered_map<string, sf::Texture> textureCache;
 
     public:
-        static const std::string NAME = "SpriteRenderable";
         static SpriteRenderable create(std::string texturePath); // TODO: make all comps use factories
         sf::Sprite* getSprite();
 };

@@ -4,7 +4,7 @@
 
 class System {
     protected:
-        void next(Entity* entity, float deltaSecs);
+        virtual void next(Entity* entity, float deltaSecs);
 };
 
 #pragma once

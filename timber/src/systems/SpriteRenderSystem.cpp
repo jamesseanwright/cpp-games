@@ -12,8 +12,11 @@ SpriteRenderSystem SpriteRenderSystem::create(sf::RenderWindow* window) {
 }
 
 void SpriteRenderSystem::next(Entity* entity, float deltaSecs) {
-    SpriteRenderable spriteRenderable = entity->getComponent<SpriteRenderable>(SpriteRenderable::NAME);
-    Positionable positionable = entity->getComponent(Positionable::NAME);
+    SpriteRenderable* spriteRenderable = entity->getComponent<SpriteRenderable*>(SPRITE_RENDERABLE_NAME); // TODO: better way of handling template param?
+    Positionable* positionable = entity->getComponent<Positionable*>(POSITIONABLE_NAME);
+    sf::Sprite* sprite = spriteRenderable->getSprite();
 
-    this->window.draw(spriteRenderable->getSprite());
+    sprite->setPosition(positionable->getX(), positionable->getY());
+
+    this->window->draw(*sprite);
 }

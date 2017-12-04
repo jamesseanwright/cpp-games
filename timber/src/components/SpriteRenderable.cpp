@@ -4,8 +4,6 @@
 #include "Component.hpp"
 #include "SpriteRenderable.hpp"
 
-const string NAME = "Positionable";
-
 SpriteRenderable::SpriteRenderable(sf::Sprite* sprite) {
     this->sprite = sprite;
 }

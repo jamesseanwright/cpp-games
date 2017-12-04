@@ -13,8 +13,8 @@ class Entity {
     public:
         Entity(vector<Component>* components);
 
-        template<Component T>
-        T* getComponent(string name);
+        template<typename T>
+        T getComponent(string name);
 };
 
 #pragma once
